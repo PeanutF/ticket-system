@@ -66,6 +66,7 @@ public class FormService {
         orderFormMapper.insert(orderForm);
         OrderFormExample orderFormExample = new OrderFormExample();
         Date now1 = addSecond(now,5);
+        now = addSecond(now,-1);
         OrderFormExample.Criteria orderFormExampleCriteria = orderFormExample.createCriteria();
         orderFormExampleCriteria.andOrderTimeBetween(now,now1);
         orderFormExampleCriteria.andUserIdEqualTo(user.getUserId());

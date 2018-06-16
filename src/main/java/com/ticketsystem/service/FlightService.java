@@ -25,4 +25,22 @@ public class FlightService {
     public void altFlight(Flight flight){
         flightMapper.updateByPrimaryKeySelective(flight);
     }
+
+    public void delFlight(int flightId){
+        flightMapper.deleteByPrimaryKey(flightId);
+    }
+
+    public List<Flight> queryByCity(String startCity, String endCity){
+        FlightExample flightExample = new FlightExample();
+        FlightExample.Criteria criteria = flightExample.createCriteria();
+        if(startCity != "")
+            criteria.andStartCityEqualTo(startCity);
+        if(endCity != "")
+            criteria.andEndCityEqualTo(endCity);
+        return flightMapper.selectByExample(flightExample);
+    }
+
+    public void addFlight(Flight flight){
+        flightMapper.insert(flight);
+    }
 }

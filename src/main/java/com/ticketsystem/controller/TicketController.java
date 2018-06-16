@@ -1,5 +1,6 @@
 package com.ticketsystem.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ticketsystem.model.Ticket;
 import com.ticketsystem.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,11 @@ public class TicketController {
         float price = Float.parseFloat(map.get("price"));
         int ticketId = Integer.parseInt(map.get("ticketId"));
         ticketService.altTicket(ticketId,flightId,passengerName,price);
+    }
+
+    @RequestMapping("deleteById")
+    public void deleteTicket(@RequestBody JSONObject jsonObject){
+        int ticketId = jsonObject.getInteger("ticketId");
+        ticketService.deleteById(ticketId);
     }
 }

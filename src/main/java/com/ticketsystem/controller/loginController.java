@@ -9,6 +9,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -20,13 +21,13 @@ public class loginController {
 
     @RequestMapping("/user")
     @ResponseBody
-    public void token(@RequestBody Map<String,String> param){
+    public User token(@RequestBody Map<String,String> param){
         String username = param.get("username");
         String password = param.get("password");
         User user = new User();
         user.setUserName(username);
         user.setUserPassword(password);
-        checkService.getToken(user);
+        return checkService.getToken(user);
     }
 
 }

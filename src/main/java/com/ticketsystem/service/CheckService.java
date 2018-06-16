@@ -12,15 +12,16 @@ public class CheckService {
     @Autowired
     private UserMapper userMapper;
 
-    public String getToken(User user){
+    public User getToken(User user){
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andUserNameEqualTo(user.getUserName());
-        if(userMapper.selectByExample(userExample) != null){
+        if(userMapper.selectByExample(userExample).size() != 0){
             criteria.andUserPasswordEqualTo(user.getUserPassword());
-            if(userMapper.selectByExample(userExample) != null)
-                //这里要写一个获取token的方法
-                return "token";//TODO
+            if(userMapper.selectByExample(userExample).size() != 0){
+                user = userMapper.selectByExample(userExample).get(0);
+                return user;
+            }
             else
                 return null;
         }else {
